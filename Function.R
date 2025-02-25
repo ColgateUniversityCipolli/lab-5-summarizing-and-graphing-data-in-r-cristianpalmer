@@ -40,6 +40,7 @@ allentown_feature <- essentia_data_allentown_csv[[feature]]
 } #End of Function
 
 #Step 2: Loop through specific columns of CSV with my function
+#Creates Tibble with data for all numeric columns
 data_tibble <- tibble()
 
 for (column in colnames(essentia_data_csv)[c(-1,-2,-3,-58,-59,-69,-70)]) {
