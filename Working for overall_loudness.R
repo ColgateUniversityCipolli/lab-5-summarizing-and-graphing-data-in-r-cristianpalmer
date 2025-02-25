@@ -4,8 +4,8 @@ library("jsonlite")
 library("tidyverse")
 
 #Step 1:
-essentia_data_allentown_csv <- read.csv("data/essentia.data.allentown.csv")
-essentia_data_csv <- read.csv("data/essentia.data.csv")
+essentia_data_allentown_csv <- read_csv("data/essentia.data.allentown.csv")
+essentia_data_csv <- read_csv("data/essentia.data.csv")
 AllenTown_overall_loudness <- essentia_data_allentown_csv[["overall_loudness"]]
 
 #Step 1 Part 1:
@@ -38,7 +38,7 @@ artist_grouped <- essentia_data_csv |>
       TRUE ~ "Within Range"
     )
   )
-
+artist_grouped
 
 
 

@@ -1,49 +1,49 @@
-#2 Lab Coding Task: Summarize the Data:
 library("stringr")
 library("jsonlite")
 library("tidyverse")
 
-#Step 1:
+# Step 1: Load Data
 essentia_data_allentown_csv <- read.csv("data/essentia.data.allentown.csv")
 essentia_data_csv <- read.csv("data/essentia.data.csv")
 
-check_range <- function(essentia_data_csv, essentia_data_allentown_csv, feature){
-  allentown.feature <- essentia_data_allentown_csv[[feature]]
+# Define Function
+feature <- "overall_loudness"  # Change this to any numeric feature
+my_function <- function(essentia_data_csv, essentia_data_allentown_csv, feature) { #Start of Function
+allentown_feature <- essentia_data_allentown_csv[[feature]]
   
-  #Step 1 Part 1:
+  # Step 1 Part 1: Group data by artist
   artist_grouped <- essentia_data_csv |>
     group_by(artist) |>
     
-    #Step 2 Part 2:
+    # Step 2 Part 2: Calculate min, max, LF, and UF
     summarize(
-      min = min(overall_loudness),
-      LF = quantile(get(feature), 0.25) - 1.5*IQR(get(feature)),
-      UF = quantile(get(feature), 0.75) + 1.5*IQR(get(feature)),
-      max = max(get(feature))
+      min = min(get(feature), na.rm = TRUE),
+      LF = quantile(get(feature), 0.25, na.rm = TRUE) - 1.5 * IQR(get(feature), na.rm = TRUE),
+      UF = quantile(get(feature), 0.75, na.rm = TRUE) + 1.5 * IQR(get(feature), na.rm = TRUE),
+      max = max(get(feature), na.rm = TRUE)
     ) |>
     
-    #Step 2 Part 3:
+    # Step 2 Part 3: Create 2 new columns, out.of.range and unusal
     mutate(
-      out.of.range = (allentown.feature < min) | 
-        (allentown.feature > max)
-    ) |>
-    mutate(
-      unusual = (allentown.feature < LF) | 
-        (allentown.feature > UF)
-    ) |>
-    
-    #Step 2 Part 4:
-    mutate(
+      out.of.range = (allentown_feature < min) | 
+        (allentown_feature > max),
+      unusual = (allentown_feature < LF) | 
+        (allentown_feature > UF),
+      
+      # Step 2 Part 4: Create new column, description
       description = case_when(
         out.of.range ~ "Out of Range",
         unusual ~ "Outlying",
         TRUE ~ "Within Range"
       )
     )
-  artist_grouped
-}
+} #End of Function
 
-for (artist in essentia_data_csv) {
-  result <- check_range(essentia_data_csv, essentia_data_allentown_csv, feature)
+#Step 2: Loop through specific columns of CSV with my function
+data_tibble <- tibble()
+
+for (column in colnames(essentia_data_csv)[4:6]) {
+  result <- my_function(essentia_data_csv, essentia_data_allentown_csv, column)
+  
+  data_tibble <- bind_rows(data_tibble, result)
 }
-result
