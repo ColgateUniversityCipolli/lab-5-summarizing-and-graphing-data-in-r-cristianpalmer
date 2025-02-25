@@ -42,8 +42,10 @@ allentown_feature <- essentia_data_allentown_csv[[feature]]
 #Step 2: Loop through specific columns of CSV with my function
 data_tibble <- tibble()
 
-for (column in colnames(essentia_data_csv)[4:6]) {
-  result <- my_function(essentia_data_csv, essentia_data_allentown_csv, column)
-  
+for (column in colnames(essentia_data_csv)[c(-1,-2,-3,-58,-59,-69,-70)]) {
+  result <- my_function(essentia_data_csv, essentia_data_allentown_csv, column) |>
+    mutate(feature = column) |>
+    select(feature, everything())
   data_tibble <- bind_rows(data_tibble, result)
 }
+
