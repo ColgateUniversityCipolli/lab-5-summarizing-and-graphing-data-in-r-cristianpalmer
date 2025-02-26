@@ -61,9 +61,72 @@ for (column in colnames(essentia_data_csv)[c(12,13,15,17,19,23,24,39,43,45)]) {
     select(feature, everything())
   data_tibble_specific <- bind_rows(data_tibble_specific, result_specific)
 }
-
+#Step 3: This is the data which I used for the table which I made in the document titled "LatexTable.Rnw"
 ######################################
 #Select Specific Columns to Use for Xtable
 ######################################
 data_selected_columns <- data_tibble_specific |>
   select(feature, artist, out.of.range, unusual, description)
+
+#Step 4:
+#Used Shiny App To Create Graphs#
+
+
+#Graph 1#
+####################################
+# Load Data
+####################################
+dat <- read_csv("data_tibble_specific.csv")
+####################################
+# Mutate data for plot
+####################################
+df <- dat %>%
+  dplyr::select("description", "artist") %>%
+  drop_na() %>%
+  group_by(!!sym("description"), !!sym("artist")) %>%
+  summarise(Observations = sum(!is.na(!!sym("description"))), .groups = "drop") %>%
+  tidyr::complete(!!sym("description"), !!sym("artist")) %>%
+  replace_na(list(Observations = 0)) %>%
+  group_by(!!sym("artist")) %>%
+  mutate(Proportion = Observations / sum(Observations)) %>%
+  arrange(desc(!!sym("description"))) %>%
+  mutate(Percent = Proportion * 100) %>%
+  mutate(denoted.group = paste("artist", " = ", !!sym("artist"), sep = ""))
+####################################
+# Create Plot
+####################################
+Graph_1 <- ggplot(df, aes(x = !!sym("description"), y = Proportion)) +
+  geom_bar(stat = "identity", width = 0.5, fill = "darkred") +
+  get("theme_bw")() +
+  xlab("Description") +
+  ylab(ifelse("Proportion" == "", "Proportion", "Proportion")) +
+  ggtitle("Proportion of Each Band's Description  (Out of Range,  Outlying,  or  Within Range)  for Selected Features", "") +
+  geom_hline(yintercept = 0) +
+  facet_wrap(~denoted.group)
+####################################
+# Print Plot
+####################################
+Graph_1
+####################################
+# Summarize Data
+####################################
+dat.summary <- dat %>%
+  dplyr::select("artist", "description") %>%
+  group_by(!!sym("artist"), !!sym("description")) %>%
+  summarize(Observations = sum(!is.na(!!sym("description"))), .groups = "drop") %>%
+  tidyr::complete(!!sym("artist"), !!sym("description")) %>%
+  replace_na(list(Observations = 0))
+missing.obs <- dat %>%
+  summarize(missing = sum(is.na(!!sym("description")) | is.na(!!sym("artist")))) %>%
+  pull(missing)
+dat.summary <- dat.summary %>%
+  filter(!(is.na(!!sym("description")) | is.na(!!sym("artist")))) %>%
+  group_by(!!sym("artist")) %>%
+  mutate(Proportion = Observations / sum(Observations)) %>%
+  arrange(desc(!!sym("artist"))) %>%
+  arrange(!!sym("description"), .by_group = TRUE) %>%
+  mutate(Percent = Proportion * 100) %>%
+  mutate_if(is.numeric, round, 4) %>%
+  ungroup() %>%
+  add_row(`:=`(!!sym("artist"), "Rows with Missing Data"), `:=`(!!sym("description"), NA), Observations = missing.obs, Proportion = NA, Percent = NA)
+####################################
