@@ -41,12 +41,29 @@ allentown_feature <- essentia_data_allentown_csv[[feature]]
 
 #Step 2: Loop through specific columns of CSV with my function
 #Creates Tibble with data for all numeric columns
-data_tibble <- tibble()
+data_tibble_everything <- tibble()
 
 for (column in colnames(essentia_data_csv)[c(-1,-2,-3,-58,-59,-69,-70)]) {
   result <- my_function(essentia_data_csv, essentia_data_allentown_csv, column) |>
     mutate(feature = column) |>
     select(feature, everything())
-  data_tibble <- bind_rows(data_tibble, result)
+  data_tibble_everything <- bind_rows(data_tibble, result)
+}
+######################################
+#Tibble With Specific Features Chosen#
+#Chose features where only one band was in range while the other 2 were in range
+######################################
+data_tibble_specific <- tibble()
+
+for (column in colnames(essentia_data_csv)[c(12,13,15,17,19,23,24,39,43,45)]) {
+  result_specific <- my_function(essentia_data_csv, essentia_data_allentown_csv, column) |>
+    mutate(feature = column) |>
+    select(feature, everything())
+  data_tibble_specific <- bind_rows(data_tibble_specific, result_specific)
 }
 
+######################################
+#Select Specific Columns to Use for Xtable
+######################################
+data_selected_columns <- data_tibble_specific |>
+  select(feature, artist, out.of.range, unusual, description)

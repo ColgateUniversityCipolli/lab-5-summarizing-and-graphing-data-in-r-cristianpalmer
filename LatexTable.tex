@@ -1,0 +1,100 @@
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{xcolor}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlsng}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hldef}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+% latex table generated in R 4.4.2 by xtable 1.8-4 package
+% Tue Feb 25 19:38:56 2025
+\begin{table}[htbp]
+\centering
+\begingroup\small
+\begin{tabular}{rlllll}
+  \hline
+ & feature & artist & out.of.range & unusual & description \\ 
+  \hline
+1 & spectral\_skewness & All Get Out & FALSE & TRUE & Outlying \\ 
+  2 & spectral\_skewness & Manchester Orchestra & FALSE & FALSE & Within Range \\ 
+  3 & spectral\_skewness & The Front Bottoms & TRUE & TRUE & Out of Range \\ 
+  4 & spectral\_rolloff & All Get Out & TRUE & TRUE & Out of Range \\ 
+  5 & spectral\_rolloff & Manchester Orchestra & FALSE & FALSE & Within Range \\ 
+  6 & spectral\_rolloff & The Front Bottoms & TRUE & TRUE & Out of Range \\ 
+  7 & spectral\_kurtosis & All Get Out & FALSE & TRUE & Outlying \\ 
+  8 & spectral\_kurtosis & Manchester Orchestra & FALSE & FALSE & Within Range \\ 
+  9 & spectral\_kurtosis & The Front Bottoms & TRUE & TRUE & Out of Range \\ 
+  10 & spectral\_entropy & All Get Out & FALSE & TRUE & Outlying \\ 
+  11 & spectral\_entropy & Manchester Orchestra & FALSE & FALSE & Within Range \\ 
+  12 & spectral\_entropy & The Front Bottoms & TRUE & TRUE & Out of Range \\ 
+  13 & spectral\_energyband\_middle\_high & All Get Out & TRUE & TRUE & Out of Range \\ 
+  14 & spectral\_energyband\_middle\_high & Manchester Orchestra & FALSE & FALSE & Within Range \\ 
+  15 & spectral\_energyband\_middle\_high & The Front Bottoms & TRUE & TRUE & Out of Range \\ 
+  16 & spectral\_complexity & All Get Out & TRUE & TRUE & Out of Range \\ 
+  17 & spectral\_complexity & Manchester Orchestra & FALSE & FALSE & Within Range \\ 
+  18 & spectral\_complexity & The Front Bottoms & TRUE & TRUE & Out of Range \\ 
+  19 & spectral\_centroid & All Get Out & TRUE & FALSE & Out of Range \\ 
+  20 & spectral\_centroid & Manchester Orchestra & FALSE & FALSE & Within Range \\ 
+  21 & spectral\_centroid & The Front Bottoms & TRUE & FALSE & Out of Range \\ 
+  22 & erbbands\_skewness & All Get Out & TRUE & TRUE & Out of Range \\ 
+  23 & erbbands\_skewness & Manchester Orchestra & FALSE & FALSE & Within Range \\ 
+  24 & erbbands\_skewness & The Front Bottoms & TRUE & TRUE & Out of Range \\ 
+  25 & dissonance & All Get Out & FALSE & TRUE & Outlying \\ 
+  26 & dissonance & Manchester Orchestra & FALSE & FALSE & Within Range \\ 
+  27 & dissonance & The Front Bottoms & TRUE & TRUE & Out of Range \\ 
+  28 & barkbands\_skewness & All Get Out & TRUE & TRUE & Out of Range \\ 
+  29 & barkbands\_skewness & Manchester Orchestra & FALSE & FALSE & Within Range \\ 
+  30 & barkbands\_skewness & The Front Bottoms & TRUE & TRUE & Out of Range \\ 
+   \hline
+\end{tabular}
+\endgroup
+\end{table}
+
+
+\end{document}

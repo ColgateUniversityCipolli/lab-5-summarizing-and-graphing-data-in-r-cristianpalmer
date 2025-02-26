@@ -1,0 +1,31 @@
+feature,artist,out.of.range,unusual,description
+spectral_skewness,All Get Out,FALSE,TRUE,Outlying
+spectral_skewness,Manchester Orchestra,FALSE,FALSE,Within Range
+spectral_skewness,The Front Bottoms,TRUE,TRUE,Out of Range
+spectral_rolloff,All Get Out,TRUE,TRUE,Out of Range
+spectral_rolloff,Manchester Orchestra,FALSE,FALSE,Within Range
+spectral_rolloff,The Front Bottoms,TRUE,TRUE,Out of Range
+spectral_kurtosis,All Get Out,FALSE,TRUE,Outlying
+spectral_kurtosis,Manchester Orchestra,FALSE,FALSE,Within Range
+spectral_kurtosis,The Front Bottoms,TRUE,TRUE,Out of Range
+spectral_entropy,All Get Out,FALSE,TRUE,Outlying
+spectral_entropy,Manchester Orchestra,FALSE,FALSE,Within Range
+spectral_entropy,The Front Bottoms,TRUE,TRUE,Out of Range
+spectral_energyband_middle_high,All Get Out,TRUE,TRUE,Out of Range
+spectral_energyband_middle_high,Manchester Orchestra,FALSE,FALSE,Within Range
+spectral_energyband_middle_high,The Front Bottoms,TRUE,TRUE,Out of Range
+spectral_complexity,All Get Out,TRUE,TRUE,Out of Range
+spectral_complexity,Manchester Orchestra,FALSE,FALSE,Within Range
+spectral_complexity,The Front Bottoms,TRUE,TRUE,Out of Range
+spectral_centroid,All Get Out,TRUE,FALSE,Out of Range
+spectral_centroid,Manchester Orchestra,FALSE,FALSE,Within Range
+spectral_centroid,The Front Bottoms,TRUE,FALSE,Out of Range
+erbbands_skewness,All Get Out,TRUE,TRUE,Out of Range
+erbbands_skewness,Manchester Orchestra,FALSE,FALSE,Within Range
+erbbands_skewness,The Front Bottoms,TRUE,TRUE,Out of Range
+dissonance,All Get Out,FALSE,TRUE,Outlying
+dissonance,Manchester Orchestra,FALSE,FALSE,Within Range
+dissonance,The Front Bottoms,TRUE,TRUE,Out of Range
+barkbands_skewness,All Get Out,TRUE,TRUE,Out of Range
+barkbands_skewness,Manchester Orchestra,FALSE,FALSE,Within Range
+barkbands_skewness,The Front Bottoms,TRUE,TRUE,Out of Range
