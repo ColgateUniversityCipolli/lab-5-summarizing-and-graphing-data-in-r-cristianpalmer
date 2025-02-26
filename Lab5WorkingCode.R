@@ -1,3 +1,5 @@
+#Lab 5 Code For all Steps
+
 library("stringr")
 library("jsonlite")
 library("tidyverse")
@@ -67,9 +69,40 @@ for (column in colnames(essentia_data_csv)[c(12,13,15,17,19,23,24,39,43,45)]) {
 ######################################
 data_selected_columns <- data_tibble_specific |>
   select(feature, artist, out.of.range, unusual, description)
+#########################################################################################################
+#Code For Table in LatesTable.Rnw                                                           
+#\documentclass{article}
+#\begin{document}
+                                                                
+#<<size='tiny', echo=FALSE, results='asis', showcoltypes = FALSE>>=
+#suppressPackageStartupMessages(library(xtable))
+#suppressPackageStartupMessages(library(tidyverse))                                                     
+
+#data_tibble_specific <- read_csv("data_selected_columns.csv", show_col_types = FALSE)                  
+#colnames(data_tibble_specific) <- c("feature", "artist", "out.of.range", "unusual", "description")     
+#datatable <- xtable(data_tibble_specific,caption = "Summary of Selected Features",table.placement='H"')
+#print(datatable, include.rownames=TRUE,size="scriptsize")
+#@
+#  \end{document}
+#########################################################################################################
+
+
+
 
 #Step 4:
-#Used Shiny App To Create Graphs#
+
+#Graph I created Myself
+ggplot(data=data_tibble_specific,
+       aes(x=description, y=artist, color=artist)) +
+  geom_boxplot() +
+  theme_bw() +
+  xlab("Description") +                       
+  ylab("Artist") +
+  ggtitle("Band Contribution Analysis: Comparing whether each artist was Out of Range, Outlying, or Within Range for Selected Features")
+
+
+
+#These Next Graphs were created Using the Shiny App#
 
 
 #Graph 1#
