@@ -1,0 +1,179 @@
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{xcolor}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlsng}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hldef}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage{amsmath} %This allows me to use the align functionality.
+                     %If you find yourself trying to replicate
+                     %something you found online, ensure you're
+                     %loading the necessary packages!
+\usepackage{amsfonts}%Math font
+\usepackage{graphicx}%For including graphics
+\usepackage{hyperref}%For Hyperlinks
+\usepackage[shortlabels]{enumitem}% For enumerated lists with labels specified
+                                  % We had to run tlmgr_install("enumitem") in R
+\hypersetup{colorlinks = true,citecolor=black} %set citations to have black (not green) color
+\usepackage{natbib}        %For the bibliography
+\setlength{\bibsep}{0pt plus 0.3ex}
+\bibliographystyle{apalike}%For the bibliography
+\usepackage[margin=0.50in]{geometry}
+\usepackage{float}
+\usepackage{multicol}
+
+%fix for figures
+\usepackage{caption}
+\newenvironment{Figure}
+  {\par\medskip\noindent\minipage{\linewidth}}
+  {\endminipage\par\medskip}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+\vspace{-1in}
+\title{Lab 05 -- MATH 240 -- Computational Statistics}
+
+\author{
+  Cristian Palmer \\
+  Student  \\
+  Mathematics  \\
+  {\tt cpalmer@colgate.edu}
+}
+
+\date{}
+
+\maketitle
+
+\begin{multicols}{2}
+\begin{abstract}
+This lab is a continuation to the lab which we completed last week. Last week, we took preliminary steps to determine which of three bands, \textit{The Front Bottoms's}, \textit{Manchester Orchestra}, or \textit{All Get Out} contributed the most to the collaboratory song \textit{Allen Town} (\cite{Song}). For this week's lab, our goal was to continue our research into this question by acquiring and organizing important music data from different sources. In this lab, we utilized the \texttt{stringr} (\cite{stringr}) and \texttt{jsonlite} (\cite{jsonlite}) packages to extract data from the \texttt{Essentia streaming music extractor} (\cite{Essentia}), \texttt{Essentia models} (\cite{Essentia2}), and  \texttt{LIWC} (\cite{LIWC}), a lyric analysis tool. 
+\end{abstract}
+
+\noindent \textbf{Keywords:} Data Frames : Loops : Merging
+\section{Introduction}
+This lab originated from the question of which band, \textit{The Front Bottoms}, \textit{Manchester Orchestra}, or \textit{All Get Out} contributed the most to the song Allen Town. One way to approach this question is to use various programs to provide us data about each band's music catalog. For this the lab, we worked to acquire, and edit this data eventually combining all of our data into a final data frame housing all of the data. We also created two \texttt{csv} files, one housing every one of these band's songs besides \textit{Allen Town} and one housing only \textit{Allen Town}. For our next lab, these \texttt{csv} files along with the final data frame will prove extremely useful for answering our question. Additionally, for the end of this lab we took the first steps to analyzing our data by creating a couple graphs which could possibly lead to an answer of which band contributed most to the song \textit{Allen Town}.
+\section{Methods}
+For this lab, we began by using the \texttt{stringr} and \texttt{jsonlite} packages to extract data from the \texttt{Essentia streaming music extractor} about the \textit{The Front Bottoms's} song \textit{Au Revoir (Audios)}. The purpose of doing this was to lay the ground work for the next step where we created a loop to complete this process for all 181 songs in the \texttt{EssentiaOutput} folder. We tasked our loop to save the data in an empty data frame. We then ran our loop, filling our data frame with \texttt{Essentia streaming music extractor} data for every song. This data frame is the first of three data frames which we eventually combined into one final inclusive data frame. Before we ran this loop however, it is important to note that we had to remove a \texttt{csv} file from the \texttt{EssentiaOutput} folder. If this file was not removed, then our loop would stop working part way through when it got to this file. Our next set of data came from the \texttt{EssentiaModelOutput.csv} file provided to us. For this data, we were tasked with manipulating the data to create new columns which would be of more interest to us for this lab. After creating, renaming, and deleting columns, we were able to finish creating our second data frame. For our third data frame, we were tasked with loading the \texttt{LIWCOutput.csv} file provided to us. \texttt{LIWC} is a software which analyses text, in our case lyrics and provides insightful data about said lyrics. Finally, we used the \texttt{merge()} function to combine all three data sets into one final data set housing data from all three of our sources. Since each of our data frames we were combining into one had columns, "artist", "track", and "album", we decided to merge on these three columns. In preparation for next lab, we also created two of our own \texttt{csv} files. One of these files housed every one of the multiple band's songs except for \textit{Allen Town}, and the other housed only \textit{Allen Town}. To complete this step, we simply utilized the \texttt{write.csv} function. As a final additional challenge, we also began to analyze this data by creating a couple graphs which could possibly lead us to an answer of which band contributed most to the song. For this step, we utilized the \textit{Shiny App} (\cite{Shiny}) provided to us. To utilize this app, we simply used the \texttt{write.csv} again, this time to write our final data frame as a \texttt{csv} file. We then simply uploaded our new final data frame as a \texttt{csv} to the \textit{Shiny App} and were able to use it to create various plots which could possibly end up being informative. However, the majority of data analysis will be done in our next lab.
+
+\section{Results}
+Our final data frame ended up consisting of 181 rows and 140 columns. This means that for all 181 songs, we have 140 different types of data about each song coming from our various data sources. We can verify that no data was lost when merging since our data frame of \texttt{Essentia streaming music extractor} data had 181 rows and 11 columns, our \texttt{LIWC} data had 181 rows and 121 columns, and our \texttt{EssentiaOutput} data had 181 rows and 14 columns. When merging these three data frames together we would expect to see 181 rows and 146 columns, since the number of rows will not change cause each row corresponds to one song and each data has the same set of songs. Our data only has 140 rows since we merged by "artist", "track", and "album". This means that these columns were not duplicated since they were the same in each data frame, therefor, it makes sense that we are 6 rows short of what we expected because two sets of these 3 columns were taking out. So, we correctly have 140 columns and 181 rows showing that no data was lost during our data altering or data merging steps. Viewing our final data frame there are also no visible issues concerning the naming of columns or data within the data frame itself. All of our data appears to be present with no "NA's", and no columns appear to be misnamed. Concerning the graphs we made, I will place the one which I believe has the highest possibility of being relevant in the appendix section below. 
+
+\section{Discussion}
+The graph I chose to include is a Violin Plot created with the \textit{Shiny App}. For each artist, this plot shows how the happiness of their catalog of songs can be distributed. Our data on happiness came from the \texttt{EssentiaOutput} data set. Looking at the graph, it appears as though the happiness level in \textit{Manchester Orchestra's} catalog most closely alligns with the level of happiness in the song which \textit{The Front Bottoms} and \textit{Manchester Orchestra} created together. So, this graph provides some evidence that possibly \textit{Manchester Orchestra} contributed most to the song. However, in our next lab we will go into much greater detail on analyzing and visualizing our data.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\nocite{jsonlite}
+\nocite{stringr}
+\nocite{tidyverse}
+\nocite{Essentia}
+\nocite{Essentia2}
+\nocite{Song}
+\nocite{Shiny}
+\nocite{LIWC}
+
+
+\vspace{2em}
+\begin{tiny}
+\bibliography{Lab5Bib}
+\end{tiny}
+\end{multicols}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Appendix
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Appendix}
+% latex table generated in R 4.4.2 by xtable 1.8-4 package
+% Tue Feb 25 19:51:59 2025
+\begin{table}[htbp]
+\centering
+\begingroup\small
+\begin{tabular}{rlllll}
+  \hline
+ & feature & artist & out.of.range & unusual & description \\ 
+  \hline
+1 & spectral\_skewness & All Get Out & FALSE & TRUE & Outlying \\ 
+  2 & spectral\_skewness & Manchester Orchestra & FALSE & FALSE & Within Range \\ 
+  3 & spectral\_skewness & The Front Bottoms & TRUE & TRUE & Out of Range \\ 
+  4 & spectral\_rolloff & All Get Out & TRUE & TRUE & Out of Range \\ 
+  5 & spectral\_rolloff & Manchester Orchestra & FALSE & FALSE & Within Range \\ 
+  6 & spectral\_rolloff & The Front Bottoms & TRUE & TRUE & Out of Range \\ 
+  7 & spectral\_kurtosis & All Get Out & FALSE & TRUE & Outlying \\ 
+  8 & spectral\_kurtosis & Manchester Orchestra & FALSE & FALSE & Within Range \\ 
+  9 & spectral\_kurtosis & The Front Bottoms & TRUE & TRUE & Out of Range \\ 
+  10 & spectral\_entropy & All Get Out & FALSE & TRUE & Outlying \\ 
+  11 & spectral\_entropy & Manchester Orchestra & FALSE & FALSE & Within Range \\ 
+  12 & spectral\_entropy & The Front Bottoms & TRUE & TRUE & Out of Range \\ 
+  13 & spectral\_energyband\_middle\_high & All Get Out & TRUE & TRUE & Out of Range \\ 
+  14 & spectral\_energyband\_middle\_high & Manchester Orchestra & FALSE & FALSE & Within Range \\ 
+  15 & spectral\_energyband\_middle\_high & The Front Bottoms & TRUE & TRUE & Out of Range \\ 
+  16 & spectral\_complexity & All Get Out & TRUE & TRUE & Out of Range \\ 
+  17 & spectral\_complexity & Manchester Orchestra & FALSE & FALSE & Within Range \\ 
+  18 & spectral\_complexity & The Front Bottoms & TRUE & TRUE & Out of Range \\ 
+  19 & spectral\_centroid & All Get Out & TRUE & FALSE & Out of Range \\ 
+  20 & spectral\_centroid & Manchester Orchestra & FALSE & FALSE & Within Range \\ 
+  21 & spectral\_centroid & The Front Bottoms & TRUE & FALSE & Out of Range \\ 
+  22 & erbbands\_skewness & All Get Out & TRUE & TRUE & Out of Range \\ 
+  23 & erbbands\_skewness & Manchester Orchestra & FALSE & FALSE & Within Range \\ 
+  24 & erbbands\_skewness & The Front Bottoms & TRUE & TRUE & Out of Range \\ 
+  25 & dissonance & All Get Out & FALSE & TRUE & Outlying \\ 
+  26 & dissonance & Manchester Orchestra & FALSE & FALSE & Within Range \\ 
+  27 & dissonance & The Front Bottoms & TRUE & TRUE & Out of Range \\ 
+  28 & barkbands\_skewness & All Get Out & TRUE & TRUE & Out of Range \\ 
+  29 & barkbands\_skewness & Manchester Orchestra & FALSE & FALSE & Within Range \\ 
+  30 & barkbands\_skewness & The Front Bottoms & TRUE & TRUE & Out of Range \\ 
+   \hline
+\end{tabular}
+\endgroup
+\end{table}
+
+
+
+
+\end{document}
