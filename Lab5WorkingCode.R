@@ -130,3 +130,74 @@ dat.summary <- dat.summary %>%
   ungroup() %>%
   add_row(`:=`(!!sym("artist"), "Rows with Missing Data"), `:=`(!!sym("description"), NA), Observations = missing.obs, Proportion = NA, Percent = NA)
 ####################################
+
+
+
+
+#Graph 2#
+####################################
+# Load Data
+####################################
+dat <- read_csv("data_tibble_specific.csv")
+####################################
+# Import required library/libraries
+####################################
+library(RColorBrewer)
+####################################
+# Mutate data for plot
+####################################
+df <- dat %>%
+  dplyr::select("description", "artist") %>%
+  drop_na() %>%
+  group_by(!!sym("artist"), !!sym("description")) %>%
+  summarize(Observations = sum(!is.na(!!sym("description"))), .groups = "drop") %>%
+  replace_na(list(Observations = 0)) %>%
+  group_by(!!sym("artist")) %>%
+  mutate(Proportion = Observations / sum(Observations)) %>%
+  arrange(desc("description")) %>%
+  mutate(Percent = Proportion * 100) %>%
+  mutate(denoted.group = paste("artist", " = ", !!sym("artist"), sep = ""))
+####################################
+# Make color palette
+####################################
+library(RColorBrewer)
+nb_cols <- length(unique(df[["description"]]))
+mycolors <- colorRampPalette(brewer.pal(min(8, max(3, nb_cols)), "Reds"))(nb_cols)
+####################################
+# Create Plot
+####################################
+Graph_2 <- ggplot(df, aes(x = "", y = Percent, fill = !!sym("description"))) +
+  geom_bar(stat = "identity") +
+  coord_polar("y", start = 0) +
+  get("theme_bw")() +
+  ggtitle("", "") +
+  scale_fill_manual("description", values = mycolors) +
+  theme(axis.title.x = element_blank(), axis.title.y = element_blank()) +
+  facet_wrap(~denoted.group)
+####################################
+# Print Plot
+####################################
+Graph_2
+####################################
+# Summarize Data
+####################################
+dat.summary <- dat %>%
+  dplyr::select("artist", "description") %>%
+  group_by(!!sym("artist"), !!sym("description")) %>%
+  summarize(Observations = sum(!is.na(!!sym("description"))), .groups = "drop") %>%
+  tidyr::complete(!!sym("artist"), !!sym("description")) %>%
+  replace_na(list(Observations = 0))
+missing.obs <- dat %>%
+  summarize(missing = sum(is.na(!!sym("description")) | is.na(!!sym("artist")))) %>%
+  pull(missing)
+dat.summary <- dat.summary %>%
+  filter(!(is.na(!!sym("description")) | is.na(!!sym("artist")))) %>%
+  group_by(!!sym("artist")) %>%
+  mutate(Proportion = Observations / sum(Observations)) %>%
+  arrange(desc(!!sym("artist"))) %>%
+  arrange(!!sym("description"), .by_group = TRUE) %>%
+  mutate(Percent = Proportion * 100) %>%
+  mutate_if(is.numeric, round, 4) %>%
+  ungroup() %>%
+  add_row(`:=`(!!sym("artist"), "Rows with Missing Data"), `:=`(!!sym("description"), NA), Observations = missing.obs, Proportion = NA, Percent = NA)
+####################################
