@@ -1,14 +1,13 @@
 \documentclass{article}
 \begin{document}
 
-<<size='scriptsize', echo=FALSE, results='asis', showcoltypes = FALSE>>=
+<<size='tiny', echo=FALSE, results='asis', showcoltypes = FALSE>>=
 suppressPackageStartupMessages(library(xtable))
 suppressPackageStartupMessages(library(tidyverse))
 
 data_tibble_specific <- read_csv("data_selected_columns.csv", show_col_types = FALSE)
 colnames(data_tibble_specific) <- c("feature", "artist", "out.of.range", "unusual", "description")
-datatable <- xtable(data_tibble_specific)
-print(datatable, include.rownames=TRUE,size="small",table.placement = "htbp")
+datatable <- xtable(data_tibble_specific,caption = "Summary of Selected Features",table.placement='H"')
+print(datatable, include.rownames=TRUE,size="scriptsize")
 @
-
 \end{document}
