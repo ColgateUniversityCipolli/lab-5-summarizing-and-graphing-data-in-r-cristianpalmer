@@ -101,7 +101,7 @@ For the past 3 weeks we have been working towards answering the question of whic
 This lab is the culmination of the three part lab series which we have been completing for the past several weeks. Last week we acquired and organized important music data from different sources to help us determine which band contributed the most to the song in this lab. This week, through analyzing the data collected in our prior labs we were able to come to the conclusion that \textit{Manchester Orchestra} contributed the most to the song \textit{Allentown}. Throughout this lab, we utilized the \texttt{stringr} \citep{stringr}, \texttt{jsonlite} \citep{jsonlite}, and \texttt{tidyverse} \citep{tidyverse} packages to complete the majority of our tasks. We also utilized both \texttt{ggplot2} \citep{ggplot2}, and the \texttt{Shiny App} provided to us via \texttt{The Data Science Collaboratory at Colgate University} \citep{Shiny} to create all graphs seen later on. This lab report will go through how we analyzed our data, and how we used this analysis to make our final determination that \textit{Manchester Orchestra} contributed the most to the song.
 
 \section{Methods}
-For this lab, we began by loading in the \texttt{Essentia} \citep{Essentia} data which we collected last lab. Our first task to analyze this data was to use \texttt{tidyverse} \citep{tidyverse} to create a function which we could use to determine whether the song \texttt{Allentown} is out of range, unusual, or in range in regards to each band's catalog of songs. The first feature of our function used the \texttt{summarize()} function from \texttt{tidyverse} to calculate the minimum, lower fence, upper fence, and maximum values that each band's catalog had for every feature in our \texttt{Essentia} Data set. We then used the \texttt{mutate()} function from \texttt{tidyverse} to create three new columns, those being \textit{out.of.range}, \textit{unusual} and \textit{description}. These new columns aimed to compare the values we calculated for every feature for each band's catalog to the values of those same features for \textit{Allentown}. 
+For this lab, we began by loading in the \texttt{Essentia} \citep{Essentia} data which we collected last lab. Our first task to analyze this data was to use \texttt{tidyverse} \citep{tidyverse} to create a function which we could use to determine whether the song \texttt{Allentown} is out of range, unusual, or in range in regards to each band's catalog of songs. The first feature of our function used the \texttt{summarize()} function from \texttt{tidyverse} to calculate the minimum, lower fence, upper fence, and maximum values that each band's catalog had for every feature in our \texttt{Essentia} data set. We then used the \texttt{mutate()} function from \texttt{tidyverse} to create three new columns, those being \textit{out.of.range}, \textit{unusual} and \textit{description}. These new columns aimed to compare the values we calculated for every feature for each band's catalog to the values of those same features for \textit{Allentown}. 
 \par\indent
 Specifically, \textit{out.of.range} would come back as \textbf{TRUE} when the given feature's value for Allentown was less than the minimum value or more than the maximum value for that same feature in relation to each band, and would come back as \textbf{FALSE} otherwise. \textit{Unusual} would come back \textbf{TRUE} when a given feature's value for Allentown was less than the lower fence (LF) or more than the upper fence (UF) for the given feature for each band, and would come back as \textbf{FALSE} otherwise. Finally, \textit{description} would come back as \textbf{Out of Range} when \textit{out.of.range} was TRUE, would come back as \textbf{Outlying} when \textit{unusual} was TRUE, and would come back as \textbf{Within Range} otherwise.
 \par\indent
@@ -109,18 +109,14 @@ Once we had all of this completed, we were able to run our function through a fo
 \par\indent
 Next, we were able to go through our new tibble full of data and pick out specific features that would be useful to determining which band contributed most to the song. For this step, I specifically chose 10 features where the \textit{description} for one band was \textbf{Within Range}, but the \textit{description} for the other two bands were either \textbf{Outlying} or \textbf{Out of Range}. I chose to pick my specific features to analyze this way because if one band is in range to \textit{Allentown} and two are not, it stands to reason that the band in range had more of an effect on the song.
 \par\indent
-To conclude, we created a \LaTeX table that summarized our selected features we used to determine which band contributed most to the song. This table can be found in the \textbf{Appendix} section. We also finished off by creating a couple of graphs using both \texttt{ggplot2} and the \texttt{Shiny App}, whcih will all be in the \textbf{Appendix}.
+To conclude, we created a \LaTeX table that summarized our selected features we used to determine which band contributed most to the song. This table can be found in the \textbf{Appendix} section. We also finished off by creating a couple of graphs using both \texttt{ggplot2} and the \texttt{Shiny App}, which will all be in the \textbf{Appendix}.
 
 \section{Results}
-Below is a box plot created using \texttt{ggplot2} which depicts each band's \textit{description's} for the features chosen to analyze:
-
-
-
+Table 1 in the \textbf{Appendix} section is the table which we created in \LaTeX to summarize the selected features which we chose to analyze.Figure 1 in the \textbf{Appendix} section is a bar graph created using \texttt{Shiny App}. This graph shows the proportion of features for each band that were \textbf{Out of Range}, \textbf{Outlying} or \textbf{Within Range}. Figure 2 in the \textbf{Appendix} section is a bar graph created using \texttt{ggplot2}. This graph shows for each of our selected features, what proportion of each description  \textbf{Out of Range}, \textbf{Outlying} or \textbf{Within Range} can be attributed to each band. Looking at both of the graphs and the table, it becomes apparent that \textit{Manchester Orchestra} was always \textbf{Within Range} for our selected features while the other two bands were not.
 
 
 \section{Discussion}
-The graph I chose to include is a Violin Plot created with the \textit{Shiny App}. For each artist, this plot shows how the happiness of their catalog of songs can be distributed. Our data on happiness came from the \texttt{EssentiaOutput} data set. Looking at the graph, it appears as though the happiness level in \textit{Manchester Orchestra's} catalog most closely alligns with the level of happiness in the song which \textit{The Front Bottoms} and \textit{Manchester Orchestra} created together. So, this graph provides some evidence that possibly \textit{Manchester Orchestra} contributed most to the song. However, in our next lab we will go into much greater detail on analyzing and visualizing our data.
-
+Analyzing our graphs, we can conclude that \textit{Manchester Orchestra} contributed the most to the collaboratory song \textit{Allentown}. For all of our selected features, they were \textbf{Within Range} while the {The Front Bottoms's} and \textit{All Get Out} were not. These findings support the idea that \textit{Manchester Orchestra} had the greatest impact on the song, since that would cause the song to be \textbf{Within Range} for them and not for the other bands. Actually listening to \textit{Allentown}, as a long time \textit{The Front Bottoms's} I can say for certain that this song sounds nothing like them. This lab allowed us to prove analytically that this song sounds nothing like them, which is extremly cool.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bibliography
@@ -147,7 +143,7 @@ The graph I chose to include is a Violin Plot created with the \textit{Shiny App
 \section{Appendix}
 
 % latex table generated in R 4.4.2 by xtable 1.8-4 package
-% Wed Feb 26 23:11:25 2025
+% Wed Feb 26 23:39:48 2025
 \begin{table}[ht]
 \centering
 \begingroup\scriptsize
@@ -193,9 +189,11 @@ The graph I chose to include is a Violin Plot created with the \textit{Shiny App
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.8\textwidth]{bar.png}
-    \vspace{1cm} % Adds vertical space between the images
-    \includegraphics[width=0.8\textwidth]{Plot.png}
+    \includegraphics[width=1.05\textwidth, trim=0 0 0 50, clip]{bar.png}
+    \caption{Proportion of Each Band's Description  (Out of Range,  Outlying,  or  Within Range)  for Selected Features}
+    \vspace{0.20cm} 
+    \includegraphics[width=1.05\textwidth, trim=0 0 0 50, clip]{Plot.png}
+    \caption{Band Contribution Analysis: Comparing whether each artist was Out of Range, Outlying, or Within Range for Selected Features}
 \end{figure}
 
 
