@@ -5,8 +5,8 @@ library("jsonlite")
 library("tidyverse")
 
 # Step 1: Load Data
-essentia_data_allentown_csv <- read.csv("data/essentia.data.allentown.csv")
-essentia_data_csv <- read.csv("data/essentia.data.csv")
+essentia_data_allentown_csv <- read_csv("data/essentia.data.allentown.csv")
+essentia_data_csv <- read_csv("data/essentia.data.csv")
 
 # Define Function
 feature <- "overall_loudness"  # Change this to any numeric feature
