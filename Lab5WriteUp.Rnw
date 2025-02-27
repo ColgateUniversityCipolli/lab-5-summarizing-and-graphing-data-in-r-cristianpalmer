@@ -58,10 +58,14 @@ Once we had all of this completed, we were able to run our function through a fo
 \par\indent
 Next, we were able to go through our new tibble full of data and pick out specific features that would be useful to determining which band contributed most to the song. For this step, I specifically chose 10 features where the \textit{description} for one band was \textbf{Within Range}, but the \textit{description} for the other two bands were either \textbf{Outlying} or \textbf{Out of Range}. I chose to pick my specific features to analyze this way because if one band is in range to \textit{Allentown} and two are not, it stands to reason that the band in range had more of an effect on the song.
 \par\indent
-To conclude, we created a \LaTeX table that summarized our selected features we used to determine which band contributed most to the song. This table can be found in the \textbf{Appendix} section. We also finished off by creating a couple of graphs using both \texttt{ggplot2} and the \texttt{Shiny App}, some of which will be in the \textbf{Appendix} and some will be below in the \textbf{Results} Section.
+To conclude, we created a \LaTeX table that summarized our selected features we used to determine which band contributed most to the song. This table can be found in the \textbf{Appendix} section. We also finished off by creating a couple of graphs using both \texttt{ggplot2} and the \texttt{Shiny App}, whcih will all be in the \textbf{Appendix}.
 
 \section{Results}
-Our final data frame ended up consisting of 181 rows and 140 columns. This means that for all 181 songs, we have 140 different types of data about each song coming from our various data sources. We can verify that no data was lost when merging since our data frame of \texttt{Essentia streaming music extractor} data had 181 rows and 11 columns, our \texttt{LIWC} data had 181 rows and 121 columns, and our \texttt{EssentiaOutput} data had 181 rows and 14 columns. When merging these three data frames together we would expect to see 181 rows and 146 columns, since the number of rows will not change cause each row corresponds to one song and each data has the same set of songs. Our data only has 140 rows since we merged by "artist", "track", and "album". This means that these columns were not duplicated since they were the same in each data frame, therefor, it makes sense that we are 6 rows short of what we expected because two sets of these 3 columns were taking out. So, we correctly have 140 columns and 181 rows showing that no data was lost during our data altering or data merging steps. Viewing our final data frame there are also no visible issues concerning the naming of columns or data within the data frame itself. All of our data appears to be present with no "NA's", and no columns appear to be misnamed. Concerning the graphs we made, I will place the one which I believe has the highest possibility of being relevant in the appendix section below. 
+Below is a box plot created using \texttt{ggplot2} which depicts each band's \textit{description's} for the features chosen to analyze:
+
+
+
+
 
 \section{Discussion}
 The graph I chose to include is a Violin Plot created with the \textit{Shiny App}. For each artist, this plot shows how the happiness of their catalog of songs can be distributed. Our data on happiness came from the \texttt{EssentiaOutput} data set. Looking at the graph, it appears as though the happiness level in \textit{Manchester Orchestra's} catalog most closely alligns with the level of happiness in the song which \textit{The Front Bottoms} and \textit{Manchester Orchestra} created together. So, this graph provides some evidence that possibly \textit{Manchester Orchestra} contributed most to the song. However, in our next lab we will go into much greater detail on analyzing and visualizing our data.
@@ -90,6 +94,7 @@ The graph I chose to include is a Violin Plot created with the \textit{Shiny App
 % Appendix
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Appendix}
+
 <<size='tiny', echo=FALSE, results='asis', showcoltypes = FALSE>>=
 suppressPackageStartupMessages(library(xtable))
 suppressPackageStartupMessages(library(tidyverse))
@@ -99,5 +104,12 @@ colnames(data_tibble_specific) <- c("feature", "artist", "out.of.range", "unusua
 datatable <- xtable(data_tibble_specific,caption = "Summary of Selected Features",table.placement='H"')
 print(datatable, include.rownames=TRUE,size="scriptsize")
 @
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{bar.png}
+    \vspace{1cm} % Adds vertical space between the images
+    \includegraphics[width=0.8\textwidth]{Plot.png}
+\end{figure}
+
 
 \end{document}
