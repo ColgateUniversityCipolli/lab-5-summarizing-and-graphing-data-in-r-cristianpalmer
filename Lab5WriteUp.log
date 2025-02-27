@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.5)  27 FEB 2025 09:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.5)  27 FEB 2025 10:44
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -455,25 +455,25 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 <bar.png, id=65, 2951.025pt x 1846.9pt>
 File: bar.png Graphic file (type png)
 <use bar.png>
-Package pdftex.def Info: bar.png  used on input line 192.
+Package pdftex.def Info: bar.png  used on input line 194.
 (pdftex.def)             Requested size: 569.1279pt x 346.50562pt.
 
-Overfull \hbox (27.10289pt too wide) in paragraph at lines 192--193
+Overfull \hbox (27.10289pt too wide) in paragraph at lines 194--195
  [][] 
  []
 
 <Plot.png, id=68, 2951.025pt x 1846.9pt>
 File: Plot.png Graphic file (type png)
 <use Plot.png>
-Package pdftex.def Info: Plot.png  used on input line 195.
+Package pdftex.def Info: Plot.png  used on input line 197.
 (pdftex.def)             Requested size: 569.1279pt x 346.50562pt.
 
-Overfull \hbox (27.10289pt too wide) in paragraph at lines 195--196
+Overfull \hbox (27.10289pt too wide) in paragraph at lines 197--198
  [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 21.0017pt on input line 197.
+LaTeX Warning: Float too large for page by 21.0017pt on input line 199.
 
 
 
@@ -490,13 +490,13 @@ Package rerunfilecheck Info: File `Lab5WriteUp.out' has not changed.
 Here is how much of TeX's memory you used:
  12288 strings out of 475172
  196549 string characters out of 5764422
- 633044 words of memory out of 5000000
+ 636044 words of memory out of 5000000
  35112 multiletter control sequences out of 15000+600000
  568545 words of font info for 74 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,9n,79p,1206b,588s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,9n,79p,1597b,588s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </Users/cristianpalmer/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></Users/cristianpalmer/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></Users/cristianpalmer/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></Users/cristianpalmer/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></Users/cristianpalmer/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></Users/cristianpalmer/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></Users/cristianpalmer/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></Users/cristianpalmer/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></Users/cristianpalmer/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></Users/cristianpalmer/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></Users/cristianpalmer/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></Users/cristianpalmer/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></Users/cristianpalmer/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></Users/cristianpalmer/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></Users/cristianpalmer/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on Lab5WriteUp.pdf (3 pages, 441856 bytes).
+Output written on Lab5WriteUp.pdf (3 pages, 443719 bytes).
 PDF statistics:
  161 PDF objects out of 1000 (max. 8388607)
  118 compressed objects within 2 object streams
